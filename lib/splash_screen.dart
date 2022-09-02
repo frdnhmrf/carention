@@ -1,31 +1,23 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:projectflutterpemula/landing_page.dart';
 import 'package:projectflutterpemula/shared_theme.dart';
 
-import 'landing_page.dart';
-
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    Timer(
-        const Duration(seconds: 3),
-        () => Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const LandingPage()),
-            (route) => false));
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    Timer(
+        const Duration(
+          seconds: 3,
+        ), () {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const LandingPage()),
+          (route) => false);
+    });
     return Scaffold(
       backgroundColor: darkBackgroundColor,
       body: Center(

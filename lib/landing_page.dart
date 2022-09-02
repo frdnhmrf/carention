@@ -7,13 +7,14 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: darkBackgroundColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 566,
+            height: screenSize.height * 0.6,
             width: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -23,28 +24,30 @@ class LandingPage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 29),
+            padding: EdgeInsets.symmetric(
+              horizontal: screenSize.width * 0.1,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Premium cars.\nEnjoy the luxury",
                   style: whiteTextStyle.copyWith(
-                    fontSize: 35,
+                    fontSize: screenSize.width * 0.08,
                     fontWeight: bold,
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: screenSize.height * 0.03),
                 Text(
                   'Premium and prestige car daily rental.\nExperience the thrill at a lower price',
                   style: greyTextStyle.copyWith(
-                    fontSize: 15,
+                    fontSize: screenSize.width * 0.04,
                   ),
                 ),
-                const SizedBox(height: 43),
+                SizedBox(height: screenSize.height * 0.05),
                 SizedBox(
                   width: double.infinity,
-                  height: 54,
+                  height: screenSize.height * 0.06,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: whiteColor,
@@ -64,7 +67,7 @@ class LandingPage extends StatelessWidget {
                     child: Text(
                       "Let's Go",
                       style: blackTextStyle.copyWith(
-                        fontSize: 20,
+                        fontSize: screenSize.width * 0.05,
                         fontWeight: bold,
                       ),
                     ),

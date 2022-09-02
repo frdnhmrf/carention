@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:projectflutterpemula/shared_theme.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool isLocation = true;
+  @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
     Widget info() {
       return Column(
         children: [
@@ -20,7 +28,6 @@ class HomePage extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 20,
-                      height: 20,
                       child: Image.asset('assets/ic_info.png'),
                     ),
                     const SizedBox(
@@ -42,7 +49,6 @@ class HomePage extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 20,
-                      height: 20,
                       child: Image.asset('assets/ic_notif.png'),
                     ),
                     const SizedBox(
@@ -82,7 +88,7 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'NEARREST CAR',
+                  'NEAREST CAR',
                   style: lightGreyTextStyle.copyWith(
                     fontSize: 12,
                   ),
@@ -104,35 +110,49 @@ class HomePage extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
+                      flex: 1,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image.asset(
-                            'assets/ic_jam_gps.png',
-                            width: 16,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '> 870km',
-                            style: lightGreyTextStyle.copyWith(
-                              fontSize: 12,
+                          SizedBox(
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/ic_jam_gps.png',
+                                  width: 16,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  '> 870km',
+                                  style: lightGreyTextStyle.copyWith(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(width: 17),
-                          Image.asset(
-                            'assets/ic_gas.png',
-                            width: 16,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '50 L',
-                            style: lightGreyTextStyle.copyWith(
-                              fontSize: 12,
+                          SizedBox(
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/ic_gas.png',
+                                  width: 16,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  '50 L',
+                                  style: lightGreyTextStyle.copyWith(
+                                    fontSize: 12,
+                                  ),
+                                )
+                              ],
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),
                     Expanded(
+                      flex: 1,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -162,61 +182,111 @@ class HomePage extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  height: 175,
-                  padding: const EdgeInsets.all(20),
+                  height: screenSize.height * 0.22,
+                  padding: EdgeInsets.all(screenSize.aspectRatio * 0.05),
                   decoration: BoxDecoration(
                     color: greyBackgroundColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 73,
-                        height: 73,
-                        margin: const EdgeInsets.only(top: 5),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(
-                              'assets/image_profile.jpeg',
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: screenSize.width * 0.11,
+                          height: screenSize.height * 0.11,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(
+                                'assets/image_profile.jpeg',
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 14),
-                      Text(
-                        'Ferdian Ma\'ruf',
-                        style: blackTextStyle.copyWith(
-                          fontSize: 16,
-                          fontWeight: medium,
+                        SizedBox(height: screenSize.height * 0.01),
+                        Text(
+                          'Ferdian',
+                          style: blackTextStyle.copyWith(
+                            fontSize: 16,
+                            fontWeight: medium,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        '\$ 4,253',
-                        style: blackTextStyle.copyWith(
-                          fontWeight: bold,
-                        ),
-                      )
-                    ],
+                        SizedBox(height: screenSize.height * 0.01),
+                        Text(
+                          '\$ 4,253',
+                          style: blackTextStyle.copyWith(
+                            fontWeight: bold,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
               const SizedBox(width: 17),
               Expanded(
-                child: Container(
-                  height: 175,
-                  decoration: BoxDecoration(
-                      color: lightGreyColor,
-                      borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(
-                          image: AssetImage('assets/maps.png'),
-                          fit: BoxFit.cover)),
-                ),
+                child: isLocation == true
+                    ? Container(
+                        height: screenSize.height * 0.22,
+                        decoration: BoxDecoration(
+                            color: lightGreyColor,
+                            borderRadius: BorderRadius.circular(20),
+                            image: const DecorationImage(
+                                image: AssetImage('assets/maps.png'),
+                                fit: BoxFit.cover)),
+                      )
+                    : Container(
+                        height: screenSize.height * 0.22,
+                        decoration: BoxDecoration(
+                          color: greyBackgroundColor,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Status : Off',
+                            style: blackTextStyle.copyWith(fontSize: 16),
+                          ),
+                        ),
+                      ),
               )
             ],
           )
+        ],
+      );
+    }
+
+    Widget location() {
+      return Column(
+        children: [
+          const SizedBox(height: 22),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.05),
+            height: screenSize.height * 0.1,
+            decoration: BoxDecoration(
+              color: greyBackgroundColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Location',
+                  style: blackTextStyle.copyWith(
+                    fontSize: 16,
+                  ),
+                ),
+                Switch(
+                  value: isLocation,
+                  onChanged: (value) {
+                    setState(() {
+                      isLocation = value;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
         ],
       );
     }
@@ -384,12 +454,13 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.06),
         child: ListView(
           children: [
             info(),
             nearest(),
             profile(),
+            location(),
             more(),
           ],
         ),
